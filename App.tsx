@@ -27,6 +27,7 @@ const App = () => {
     return (
       <View style={styles.landingContainer}>
         <Text style={styles.landingText}>Welcome to my hello world React Native app!</Text>
+        <Text style={styles.landingText}>More soon?</Text>
         <Button title="Logout" onPress={handleLogout} color="#841584" />
       </View>
     )
