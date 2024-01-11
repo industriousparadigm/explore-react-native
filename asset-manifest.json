@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.js": "/explore-react-native/static/js/main.2cae6bb3.js",
+    "static/js/945.da52640e.js": "/explore-react-native/static/js/945.da52640e.js",
+    "favicon.ico": "/explore-react-native/favicon.ico",
+    "index.html": "/explore-react-native/index.html",
+    "favicon-32.png": "/explore-react-native/favicon-32.png",
+    "favicon-16.png": "/explore-react-native/favicon-16.png",
+    "manifest.json": "/explore-react-native/manifest.json",
+    "serve.json": "/explore-react-native/serve.json",
+    "main.2cae6bb3.js.map": "/explore-react-native/static/js/main.2cae6bb3.js.map",
+    "945.da52640e.js.map": "/explore-react-native/static/js/945.da52640e.js.map"
+  },
+  "entrypoints": [
+    "static/js/945.da52640e.js",
+    "static/js/main.2cae6bb3.js"
+  ]
+}
