@@ -3,4 +3,7 @@ export type RootStackParamList = {
   Initial: undefined
   SignIn: undefined
   Welcome: undefined
+  ForgotPassword: undefined
+  CreateAccount: undefined
+  Onboarding: undefined
 }

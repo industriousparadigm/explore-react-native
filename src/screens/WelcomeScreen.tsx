@@ -1,11 +1,12 @@
 import React from "react"
-import { SafeAreaView, StyleSheet, View, Image } from "react-native"
+import { StyleSheet, View, Image } from "react-native"
 import { Text } from "../components/CustomText"
 import { textStyles } from "../styles"
+import PageLayout from "../components/PageLayout"
 
 const WelcomeScreen = () => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#4A90E2" }}>
+    <PageLayout type="blue">
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           {/* Assuming you have a logo.png in your assets/images/ directory */}
@@ -17,7 +18,7 @@ const WelcomeScreen = () => {
         </Text>
         <Text style={styles.footerText}>Everything starts today</Text>
       </View>
-    </SafeAreaView>
+    </PageLayout>
   )
 }
 

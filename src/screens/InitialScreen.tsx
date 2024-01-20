@@ -1,28 +1,21 @@
 import React from "react"
-import { View, TouchableOpacity, StyleSheet, Image } from "react-native"
-import { useNavigation } from "@react-navigation/native"
-import { StackNavigationProp } from "@react-navigation/stack"
+import { View, StyleSheet } from "react-native"
 import { Text } from "../components/CustomText"
 import { textStyles } from "../styles"
 import Button from "../components/Button"
 import Spacer from "../components/Spacer"
-import { SafeAreaView } from "react-native-safe-area-context"
 import Divider from "../components/Divider"
-import { RootStackParamList } from "../types"
+import { useTypedNavigation } from "../hooks/useTypedNavigation"
+import PageLayout from "../components/PageLayout"
+import { LogoHorizontal } from "../components/LogoHorizontal"
 
 const InitialScreen = () => {
-  const navigation = useNavigation<any>()
-
-  const handleLogin = () => {
-    // Your login logic here
-    console.log("Login successful")
-    // Navigate to the success screen, etc.
-  }
+  const navigation = useTypedNavigation()
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+    <PageLayout type="white">
       <View style={styles.container}>
-        <Image source={require("../../assets/images/logo-horizontal.png")} style={styles.logoHorizontal} />
+        <LogoHorizontal />
         <Spacer size={48} />
         <Text style={textStyles.boldText}>Let's start</Text>
         <Spacer size={30} />
@@ -31,9 +24,11 @@ const InitialScreen = () => {
           To access more information and features please Sign In or create account.
         </Text>
         <Spacer size={20} />
-        <Button type="outline">Continue without sign in</Button>
+        <Button type="outline" onPress={() => navigation.navigate("Welcome")}>
+          Continue without sign in
+        </Button>
         <Spacer size={20} />
-        <Button onPress={() => navigation.navigate("SignIn")} type="primary">
+        <Button type="primary" onPress={() => navigation.navigate("SignIn")}>
           Sign in
         </Button>
         <Spacer size={20} />
@@ -49,7 +44,7 @@ const InitialScreen = () => {
           Continue with Google
         </Button>
       </View>
-    </SafeAreaView>
+    </PageLayout>
   )
 }
 
@@ -57,11 +52,6 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     padding: 16,
-  },
-  logoHorizontal: {
-    width: 211,
-    height: 38,
-    resizeMode: "contain",
   },
 })
 

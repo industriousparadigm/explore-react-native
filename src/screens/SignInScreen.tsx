@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { SafeAreaView, StyleSheet, View, TouchableOpacity, Alert } from "react-native"
+import { StyleSheet, View, TouchableOpacity, Alert } from "react-native"
 import Button from "../components/Button" // Adjust the path as needed
 import { useTypedNavigation } from "../hooks/useTypedNavigation"
 import Divider from "../components/Divider"
@@ -7,6 +7,7 @@ import Spacer from "../components/Spacer"
 import { textStyles } from "../styles"
 import UserInput from "../components/UserInput"
 import { Text } from "../components/CustomText"
+import PageLayout from "../components/PageLayout"
 
 const SignInScreen = () => {
   const [email, setEmail] = useState("")
@@ -43,7 +44,7 @@ const SignInScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+    <PageLayout type="white">
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={[textStyles.boldText]}>Sign in</Text>
@@ -74,20 +75,17 @@ const SignInScreen = () => {
         <Spacer size={30} />
         <TouchableOpacity
           onPress={() => {
-            Alert.alert(
-              "Coming Soon!", // Title of the alert
-              "This feature will be available in future updates.", // Message of the alert
-              [
-                {
-                  text: "OK", // The text on the button
-                  onPress: () => console.log("OK Pressed"), // Optional press handler
-                },
-              ],
-              { cancelable: true }, // If pressing outside the alert dismisses it
-            )
+            Alert.alert("Coming Soon!", "This feature will be available in future updates.", [{ text: "OK" }], {
+              cancelable: true,
+            })
           }}
         >
-          <Text style={[textStyles.regularText, styles.forgotPassword]}>Forgot password?</Text>
+          <Text
+            style={[textStyles.regularText, styles.forgotPassword]}
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
+            Forgot password?
+          </Text>
         </TouchableOpacity>
         <Spacer size={20} />
         <Divider />
@@ -100,7 +98,7 @@ const SignInScreen = () => {
           Continue with Google
         </Button>
       </View>
-    </SafeAreaView>
+    </PageLayout>
   )
 }
 
