@@ -1,22 +1,27 @@
 {
   "files": {
-    "main.js": "/explore-react-native/static/js/main.04f8e976.js",
-    "static/js/660.a0379d81.js": "/explore-react-native/static/js/660.a0379d81.js",
+    "main.js": "/explore-react-native/static/js/main.a41615f2.js",
+    "static/js/784.66f58c3b.js": "/explore-react-native/static/js/784.66f58c3b.js",
     "static/media/Gilroy-Regular.ttf": "/explore-react-native/static/media/Gilroy-Regular.5b89a8df3b17dccdb73f.ttf",
     "static/media/Gilroy-Bold.ttf": "/explore-react-native/static/media/Gilroy-Bold.ca49f7658c4eaac78b6d.ttf",
     "static/media/Gilroy-Black.ttf": "/explore-react-native/static/media/Gilroy-Black.3566c87fe5eaaa7052d5.ttf",
+    "static/media/onboarding-3.svg": "/explore-react-native/static/media/onboarding-3.13e83dc536c60a3980ae.svg",
+    "static/media/onboarding-4.svg": "/explore-react-native/static/media/onboarding-4.65cb9148a2fc09369545.svg",
+    "static/media/onboarding-1.svg": "/explore-react-native/static/media/onboarding-1.deb391906d00ae474c86.svg",
+    "static/media/forgot-password.svg": "/explore-react-native/static/media/forgot-password.d8dc0d85bebc0203e631.svg",
     "favicon.ico": "/explore-react-native/favicon.ico",
+    "static/media/onboarding-2.svg": "/explore-react-native/static/media/onboarding-2.751159449b062920570f.svg",
     "index.html": "/explore-react-native/index.html",
     "static/media/logo-horizontal.png": "/explore-react-native/static/media/logo-horizontal.6549e2d39f3f3ed9cb8c.png",
     "favicon-32.png": "/explore-react-native/favicon-32.png",
     "favicon-16.png": "/explore-react-native/favicon-16.png",
     "manifest.json": "/explore-react-native/manifest.json",
     "serve.json": "/explore-react-native/serve.json",
-    "main.04f8e976.js.map": "/explore-react-native/static/js/main.04f8e976.js.map",
-    "660.a0379d81.js.map": "/explore-react-native/static/js/660.a0379d81.js.map"
+    "main.a41615f2.js.map": "/explore-react-native/static/js/main.a41615f2.js.map",
+    "784.66f58c3b.js.map": "/explore-react-native/static/js/784.66f58c3b.js.map"
   },
   "entrypoints": [
-    "static/js/660.a0379d81.js",
-    "static/js/main.04f8e976.js"
+    "static/js/784.66f58c3b.js",
+    "static/js/main.a41615f2.js"
   ]
 }
