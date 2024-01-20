@@ -1,102 +1,49 @@
+// App.tsx
 import React, { useState } from "react"
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native"
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
+import LogoScreen from "./src/screens/LogoScreen"
+import InitialScreen from "./src/screens/InitialScreen"
+import * as Font from "expo-font"
+import AppLoading from "expo-app-loading"
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
+import SignInScreen from "./src/screens/SignInScreen"
+import WelcomeScreen from "./src/screens/WelcomeScreen"
 
-const App = () => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [loginAttempted, setLoginAttempted] = useState(false)
+const Stack = createStackNavigator()
 
-  const handleLogin = () => {
-    setLoginAttempted(true)
-    if (username === "user" && password === "12345") {
-      setIsLoggedIn(true)
-    } else {
-      Alert.alert("Login Failed", "Wrong credentials", [{ text: "OK" }])
-    }
-  }
-
-  const handleLogout = () => {
-    setIsLoggedIn(false)
-    setUsername("")
-    setPassword("")
-    setLoginAttempted(false)
-  }
-
-  if (isLoggedIn) {
-    return (
-      <View style={styles.landingContainer}>
-        <Text style={styles.landingText}>Welcome to my hello world React Native app!</Text>
-        <Button title="Logout" onPress={handleLogout} color="#841584" />
-      </View>
-    )
-  }
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-        autoCapitalize="none"
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-
-      {loginAttempted && username !== "user" && password !== "12345" && (
-        <Text style={styles.errorText}>Wrong credentials</Text>
-      )}
-
-      <Button title="Login" onPress={handleLogin} />
-    </View>
-  )
+async function loadFonts() {
+  await Font.loadAsync({
+    "Gilroy-Regular": require("./assets/fonts/Gilroy-Regular.ttf"),
+    "Gilroy-Bold": require("./assets/fonts/Gilroy-Bold.ttf"),
+    "Gilroy-Black": require("./assets/fonts/Gilroy-Black.ttf"),
+    // Include any other font weights or styles you have
+  })
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    backgroundColor: "#f0f0f0",
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-  input: {
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "gray",
-    padding: 10,
-    marginBottom: 20,
-  },
-  errorText: {
-    color: "red",
-    marginBottom: 10,
-  },
-  landingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#4caf50", // Feel free to choose a funky color!
-  },
-  landingText: {
-    fontSize: 24,
-    color: "white",
-    textAlign: "center",
-    paddingHorizontal: 20,
-    marginBottom: 20, // Added some margin for visual spacing
-  },
-})
+const App = () => {
+  const [fontsLoaded, setFontsLoaded] = useState(false)
+
+  if (!fontsLoaded) {
+    return <AppLoading startAsync={loadFonts} onFinish={() => setFontsLoaded(true)} onError={console.warn} />
+  }
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Logo"
+          screenOptions={{
+            headerShown: false, // we don't want to show a header navigation
+          }}
+        >
+          <Stack.Screen name="Logo" component={LogoScreen} />
+          <Stack.Screen name="Initial" component={InitialScreen} />
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  )
+}
 
 export default App
