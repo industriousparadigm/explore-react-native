@@ -1,12 +1,13 @@
 import React, { useState } from "react"
-import { StyleSheet, View, TouchableOpacity, Alert, Image } from "react-native"
-import Button from "../components/Button" // Adjust the path as needed
+import { StyleSheet, View, TouchableOpacity, Alert } from "react-native"
+import Button from "../components/Button"
 import { useTypedNavigation } from "../hooks/useTypedNavigation"
 import Spacer from "../components/Spacer"
 import { textStyles } from "../styles"
 import UserInput from "../components/UserInput"
 import { Text } from "../components/CustomText"
 import PageLayout from "../components/PageLayout"
+import MultiEnvironmentSvg from "../components/MultiEnvironmentSvg"
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("")
@@ -32,9 +33,6 @@ const ForgotPasswordScreen = () => {
 
     // if email is valid we're all good, show success graphics
     setProcessComplete(true)
-
-    // Navigate to Success screen if credentials are correct?
-    // Or instead, show success graphics
   }
 
   return (
@@ -55,10 +53,10 @@ const ForgotPasswordScreen = () => {
 
             <Spacer size={94} />
 
-            <Image
+            <MultiEnvironmentSvg
               // TODO: this friggin image is not responsive
-              style={{ resizeMode: "contain", width: 309, height: 273, alignSelf: "center" }}
-              source={require("../../assets/images/forgot-password.svg")}
+              style={{ width: 309, height: 273, alignSelf: "center" }}
+              src={"https://res.cloudinary.com/thunder-fusion/image/upload/v1705781258/u0nrccwbzlu1gbav0aw0.svg"}
             />
 
             <Spacer size={94} />
@@ -140,7 +138,6 @@ const styles = StyleSheet.create({
   forgotPassword: {
     color: "#4A90E2",
   },
-  // Add styles for any other elements as needed
 })
 
 export default ForgotPasswordScreen

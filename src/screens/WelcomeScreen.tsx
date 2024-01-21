@@ -9,7 +9,6 @@ const WelcomeScreen = () => {
     <PageLayout type="blue">
       <View style={styles.container}>
         <View style={styles.logoContainer}>
-          {/* Assuming you have a logo.png in your assets/images/ directory */}
           <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
         </View>
         <Text>

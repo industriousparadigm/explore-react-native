@@ -2,6 +2,8 @@
 
 I am experimenting with React Native: getting familiar with development and getting apps online.
 
+The project is using Expo Go for development and internal distribution.
+
 ## Run Locally
 
 1. **Clone the Repository**:

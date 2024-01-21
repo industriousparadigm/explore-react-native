@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import {
   View,
   Text,
@@ -7,20 +7,17 @@ import {
   StyleSheet,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  Image,
   TouchableOpacity,
-  Alert,
 } from "react-native"
 import PageLayout from "../components/PageLayout"
 import Spacer from "../components/Spacer"
 import { textStyles } from "../styles"
 import { LogoHorizontal } from "../components/LogoHorizontal"
-import Button from "../components/Button"
 import { useTypedNavigation } from "../hooks/useTypedNavigation"
+import MultiEnvironmentSvg from "../components/MultiEnvironmentSvg"
 
-const { width } = Dimensions.get("window")
 const PADDING = 16
-
+const { width } = Dimensions.get("window")
 const adjustedWidth = width - PADDING * 2
 
 const OnboardingScreen = () => {
@@ -28,32 +25,58 @@ const OnboardingScreen = () => {
   const isFirstSlide = activeIndex === 0
   const isLastSlide = activeIndex === 3
 
+  const scrollViewRef = useRef<any>(null)
+
   const { navigate } = useTypedNavigation()
 
-  // Handle the scroll event
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x
     const currentIndex = Math.round(contentOffsetX / width)
     setActiveIndex(currentIndex)
   }
 
-  // Render the pagination dots
-  const renderPagination = () => {
+  const goToNextSlide = () => {
+    if (!isLastSlide) {
+      const nextIndex = activeIndex + 1
+      scrollViewRef.current?.scrollTo({
+        x: nextIndex * adjustedWidth,
+        animated: true,
+      })
+      setActiveIndex(nextIndex)
+    }
+  }
+
+  const goToPrevSlide = () => {
+    if (!isFirstSlide) {
+      const prevIndex = activeIndex - 1
+      scrollViewRef.current?.scrollTo({
+        x: prevIndex * adjustedWidth,
+        animated: true,
+      })
+      setActiveIndex(prevIndex)
+    }
+  }
+
+  const renderPaginationDots = () => {
     const dots = []
     for (let i = 0; i < 4; i++) {
       dots.push(<View key={i} style={[styles.dot, activeIndex === i ? styles.activeDot : styles.inactiveDot]} />)
     }
     return (
       <View style={styles.pagination}>
-        <Image
-          style={[styles.arrowIcon, isFirstSlide && styles.hiddenArrow]}
-          source={require("../../assets/images/arrow-left.svg")}
-        />
+        <TouchableOpacity onPress={goToPrevSlide}>
+          <MultiEnvironmentSvg
+            style={[styles.arrowIcon, isFirstSlide && styles.hiddenArrow]}
+            src={"https://res.cloudinary.com/thunder-fusion/image/upload/v1705781258/bbrhem4nhyottimxjnup.svg"}
+          />
+        </TouchableOpacity>
         <View style={styles.dotsBox}>{dots}</View>
-        <Image
-          style={[styles.arrowIcon, isLastSlide && styles.hiddenArrow]}
-          source={require("../../assets/images/arrow-right.svg")}
-        />
+        <TouchableOpacity onPress={goToNextSlide}>
+          <MultiEnvironmentSvg
+            style={[styles.arrowIcon, isLastSlide && styles.hiddenArrow]}
+            src={"https://res.cloudinary.com/thunder-fusion/image/upload/v1705781258/zlbiujksebdmrhfrpijl.svg"}
+          />
+        </TouchableOpacity>
 
         {isLastSlide && (
           <TouchableOpacity style={styles.skipButton} onPress={() => navigator}>
@@ -78,13 +101,13 @@ const OnboardingScreen = () => {
         <Spacer size={94} />
 
         <ScrollView
+          ref={scrollViewRef}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           onScroll={handleScroll}
           scrollEventThrottle={16}
         >
-          {/* Replace these Views with your actual onboarding content */}
           <View style={styles.page}>
             <Text style={[textStyles.boldText, styles.onboardingText]}>
               Welcome to hometrail.{"\n"}
@@ -93,10 +116,10 @@ const OnboardingScreen = () => {
             </Text>
 
             <Spacer size={48} />
-            <Image
+            <MultiEnvironmentSvg
+              src={"https://res.cloudinary.com/thunder-fusion/image/upload/v1705781258/ece2bmkvnuxjiixzxlvq.svg"}
               // TODO: images are not responsive
-              style={{ resizeMode: "contain", width: 266, height: 305, alignSelf: "center" }}
-              source={require("../../assets/images/onboarding-1.svg")}
+              style={{ width: 266, height: 305, alignSelf: "center" }}
             />
           </View>
           <View style={styles.page}>
@@ -105,10 +128,10 @@ const OnboardingScreen = () => {
             </Text>
 
             <Spacer size={48} />
-            <Image
+            <MultiEnvironmentSvg
+              src={"https://res.cloudinary.com/thunder-fusion/image/upload/v1705781260/zzhc0ippdknlnqxwjgp0.svg"}
               // TODO: images are not responsive
-              style={{ resizeMode: "contain", width: 312, height: 305, alignSelf: "center" }}
-              source={require("../../assets/images/onboarding-2.svg")}
+              style={{ width: 312, height: 305, alignSelf: "center" }}
             />
           </View>
           <View style={styles.page}>
@@ -118,10 +141,10 @@ const OnboardingScreen = () => {
 
             <Spacer size={48} />
 
-            <Image
+            <MultiEnvironmentSvg
+              src={"https://res.cloudinary.com/thunder-fusion/image/upload/v1705781259/pqvveyegjqsxyg9p4vpj.svg"}
               // TODO: images are not responsive
-              style={{ resizeMode: "contain", width: 303, height: 305, alignSelf: "center" }}
-              source={require("../../assets/images/onboarding-3.svg")}
+              style={{ width: 303, height: 305, alignSelf: "center" }}
             />
           </View>
           <View style={styles.page}>
@@ -131,14 +154,14 @@ const OnboardingScreen = () => {
 
             <Spacer size={48} />
 
-            <Image
+            <MultiEnvironmentSvg
+              src={"https://res.cloudinary.com/thunder-fusion/image/upload/v1705781258/tgqob6f7ybltuwmcpcfr.svg"}
               // TODO: images are not responsive
-              style={{ resizeMode: "contain", width: 316, height: 305, alignSelf: "center" }}
-              source={require("../../assets/images/onboarding-4.svg")}
+              style={{ width: 316, height: 305, alignSelf: "center" }}
             />
           </View>
         </ScrollView>
-        {renderPagination()}
+        {renderPaginationDots()}
       </View>
     </PageLayout>
   )

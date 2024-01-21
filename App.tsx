@@ -19,8 +19,6 @@ async function loadFonts() {
   await Font.loadAsync({
     "Gilroy-Regular": require("./assets/fonts/Gilroy-Regular.ttf"),
     "Gilroy-Bold": require("./assets/fonts/Gilroy-Bold.ttf"),
-    "Gilroy-Black": require("./assets/fonts/Gilroy-Black.ttf"),
-    // Include any other font weights or styles you have
   })
 }
 

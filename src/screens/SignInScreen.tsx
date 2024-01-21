@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { StyleSheet, View, TouchableOpacity, Alert } from "react-native"
-import Button from "../components/Button" // Adjust the path as needed
+import Button from "../components/Button"
 import { useTypedNavigation } from "../hooks/useTypedNavigation"
 import Divider from "../components/Divider"
 import Spacer from "../components/Spacer"
@@ -39,7 +39,6 @@ const SignInScreen = () => {
       return
     }
 
-    // Navigate to Home screen if credentials are correct
     navigation.navigate("Welcome")
   }
 
@@ -135,7 +134,6 @@ const styles = StyleSheet.create({
   forgotPassword: {
     color: "#4A90E2",
   },
-  // Add styles for any other elements as needed
 })
 
 export default SignInScreen

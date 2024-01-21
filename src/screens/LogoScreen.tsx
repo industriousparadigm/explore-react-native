@@ -3,9 +3,6 @@ import { TouchableOpacity, StyleSheet, Image } from "react-native"
 import PageLayout from "../components/PageLayout"
 import { useTypedNavigation } from "../hooks/useTypedNavigation"
 
-// This defines the type for the navigation prop
-// type LogoScreenNavigationProp = StackNavigationProp<RootStackParamList, "Logo">
-
 const LogoScreen = () => {
   const navigation = useTypedNavigation()
 
