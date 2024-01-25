@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   TouchableOpacity,
+  Animated,
 } from "react-native"
 import PageLayout from "../components/PageLayout"
 import Spacer from "../components/Spacer"
@@ -20,12 +21,22 @@ const PADDING = 16
 const { width } = Dimensions.get("window")
 const adjustedWidth = width - PADDING * 2
 
-const OnboardingScreen = () => {
+const Onboarding = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const isFirstSlide = activeIndex === 0
   const isLastSlide = activeIndex === 3
 
   const scrollViewRef = useRef<any>(null)
+  const fadeAnim = useRef(new Animated.Value(0)).current
+
+  useEffect(() => {
+    // Animate the opacity to 1 over 250 milliseconds
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 150,
+      useNativeDriver: true, // Using native driver for better performance
+    }).start()
+  }, [fadeAnim])
 
   const { navigate } = useTypedNavigation()
 
@@ -80,7 +91,7 @@ const OnboardingScreen = () => {
 
         {isLastSlide && (
           <TouchableOpacity style={styles.skipButton} onPress={() => navigator}>
-            <Text style={[textStyles.regularText, styles.blueText]} onPress={() => navigate("Initial")}>
+            <Text style={[textStyles.regularText, styles.blueText]} onPress={() => navigate("LoginOptions")}>
               Ready
             </Text>
           </TouchableOpacity>
@@ -91,10 +102,10 @@ const OnboardingScreen = () => {
 
   return (
     <PageLayout type="white">
-      <View style={styles.container}>
+      <Animated.View style={{ ...styles.container, opacity: fadeAnim }}>
         <View style={styles.header}>
           <LogoHorizontal />
-          <TouchableOpacity style={styles.skipButton} onPress={() => navigate("Initial")}>
+          <TouchableOpacity style={styles.skipButton} onPress={() => navigate("LoginOptions")}>
             <Text style={textStyles.regularText}>Skip</Text>
           </TouchableOpacity>
         </View>
@@ -162,7 +173,7 @@ const OnboardingScreen = () => {
           </View>
         </ScrollView>
         {renderPaginationDots()}
-      </View>
+      </Animated.View>
     </PageLayout>
   )
 }
@@ -229,4 +240,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default OnboardingScreen
+export default Onboarding

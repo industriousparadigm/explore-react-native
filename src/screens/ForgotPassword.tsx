@@ -9,7 +9,7 @@ import { Text } from "../components/CustomText"
 import PageLayout from "../components/PageLayout"
 import MultiEnvironmentSvg from "../components/MultiEnvironmentSvg"
 
-const ForgotPasswordScreen = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("")
   const [processComplete, setProcessComplete] = useState(false)
   const [emailError, setEmailError] = useState("")
@@ -140,4 +140,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ForgotPasswordScreen
+export default ForgotPassword

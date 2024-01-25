@@ -1,6 +1,6 @@
 export type RootStackParamList = {
   Logo: undefined
-  Initial: undefined
+  LoginOptions: undefined
   SignIn: undefined
   Welcome: undefined
   ForgotPassword: undefined

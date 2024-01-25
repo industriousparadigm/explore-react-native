@@ -9,7 +9,7 @@ import UserInput from "../components/UserInput"
 import { Text } from "../components/CustomText"
 import PageLayout from "../components/PageLayout"
 
-const SignInScreen = () => {
+const SignIn = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [emailError, setEmailError] = useState("")
@@ -54,7 +54,7 @@ const SignInScreen = () => {
         <Spacer size={39} />
         <UserInput
           label="Email address"
-          type="email"
+          keyboardType="email-address"
           placeholder="E.g. 1234@hometrail.com"
           value={email}
           onChangeText={setEmail}
@@ -62,8 +62,8 @@ const SignInScreen = () => {
         />
         <UserInput
           label="Password"
-          type="password"
           placeholder="Your password"
+          secureTextEntry
           value={password}
           onChangeText={setPassword}
           error={passwordError}
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default SignInScreen
+export default SignIn

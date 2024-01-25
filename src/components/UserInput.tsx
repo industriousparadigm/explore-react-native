@@ -3,29 +3,50 @@ import { View, TextInput, StyleSheet } from "react-native"
 import { Text } from "./CustomText"
 
 type UserInputProps = {
-  label: string
-  type: "email" | "password"
+  label?: string
   placeholder?: string
   error?: string
   value: string
   onChangeText: (text: string) => void
+  secureTextEntry?: boolean
+  keyboardType?:
+    | "default"
+    | "email-address"
+    | "numeric"
+    | "phone-pad"
+    | "ascii-capable"
+    | "numbers-and-punctuation"
+    | "url"
+    | "number-pad"
+    | "name-phone-pad"
+    | "decimal-pad"
+    | "twitter"
+    | "web-search"
+    | "visible-password"
 }
 
-const UserInput: React.FC<UserInputProps> = ({ label, type, placeholder, error, value, onChangeText }) => {
+const UserInput: React.FC<UserInputProps> = ({
+  label,
+  placeholder,
+  error,
+  value,
+  onChangeText,
+  secureTextEntry = false,
+  keyboardType = "default",
+}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      {label && <Text style={styles.label}>{label}</Text>}
       <TextInput
         style={[styles.input, !!error && styles.inputError]}
-        placeholder={placeholder || type}
-        placeholderTextColor="#9C9C9C" // Set the placeholder text color to grey
+        placeholder={placeholder}
+        placeholderTextColor="#9C9C9C"
         value={value}
         onChangeText={onChangeText}
-        keyboardType={type === "email" ? "email-address" : "default"}
-        secureTextEntry={type === "password"}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
         autoCapitalize="none"
       />
-      {/* Reserve space for error message */}
       <View style={styles.errorContainer}>{!!error && <Text style={styles.errorText}>{error}</Text>}</View>
     </View>
   )

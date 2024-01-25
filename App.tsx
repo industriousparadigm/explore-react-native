@@ -1,54 +1,82 @@
 // App.tsx
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
-import LogoScreen from "./src/screens/LogoScreen"
-import InitialScreen from "./src/screens/InitialScreen"
+import LoginOptions from "./src/screens/LoginOptions"
 import * as Font from "expo-font"
-import AppLoading from "expo-app-loading"
+import * as SplashScreen from "expo-splash-screen"
 import { SafeAreaProvider } from "react-native-safe-area-context"
-import SignInScreen from "./src/screens/SignInScreen"
-import WelcomeScreen from "./src/screens/WelcomeScreen"
-import ForgotPasswordScreen from "./src/screens/ForgotPasswordScreen"
-import { StatusBar } from "react-native"
-import OnboardingScreen from "./src/screens/OnboardingScreen"
+import SignIn from "./src/screens/SignIn"
+import Welcome from "./src/screens/Welcome"
+import ForgotPassword from "./src/screens/ForgotPassword"
+import { StatusBar, StyleSheet, View } from "react-native"
+import Onboarding from "./src/screens/Onboarding"
+import CreateAccount from "./src/screens/CreateAccount"
 
 const Stack = createStackNavigator()
 
-async function loadFonts() {
-  await Font.loadAsync({
-    "Gilroy-Regular": require("./assets/fonts/Gilroy-Regular.ttf"),
-    "Gilroy-Bold": require("./assets/fonts/Gilroy-Bold.ttf"),
-  })
-}
+async function loadFonts() {}
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync()
 
 const App = () => {
-  const [fontsLoaded, setFontsLoaded] = useState(false)
+  const [appIsReady, setAppIsReady] = useState(false)
 
-  if (!fontsLoaded) {
-    return <AppLoading startAsync={loadFonts} onFinish={() => setFontsLoaded(true)} onError={console.warn} />
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Pre-load fonts, make any API calls you need to do here
+        await Font.loadAsync({
+          "Gilroy-Regular": require("./assets/fonts/Gilroy-Regular.ttf"),
+          "Gilroy-Bold": require("./assets/fonts/Gilroy-Bold.ttf"),
+        })
+      } catch (e) {
+        console.warn(e)
+      } finally {
+        setAppIsReady(true)
+      }
+    }
+
+    prepare()
+  }, [])
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync()
+    }
+  }, [appIsReady])
+
+  if (!appIsReady) {
+    return <View style={styles.splash}></View>
   }
+
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider onLayout={onLayoutRootView}>
       <StatusBar barStyle={"light-content"} showHideTransition={"fade"} />
 
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Logo"
+          initialRouteName="Onboarding"
           screenOptions={{
             headerShown: false, // we don't want to show a header navigation
           }}
         >
-          <Stack.Screen name="Logo" component={LogoScreen} />
-          <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-          <Stack.Screen name="Initial" component={InitialScreen} />
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
-          <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+          <Stack.Screen name="Onboarding" component={Onboarding} />
+          <Stack.Screen name="LoginOptions" component={LoginOptions} />
+          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="CreateAccount" component={CreateAccount} />
+          <Stack.Screen name="Welcome" component={Welcome} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
   )
 }
+
+const styles = StyleSheet.create({
+  splash: { width: "100%", height: "100%", backgroundColor: "limegreen" },
+})
+
 
 export default App

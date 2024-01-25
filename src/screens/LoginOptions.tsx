@@ -9,8 +9,8 @@ import { useTypedNavigation } from "../hooks/useTypedNavigation"
 import PageLayout from "../components/PageLayout"
 import { LogoHorizontal } from "../components/LogoHorizontal"
 
-const InitialScreen = () => {
-  const navigation = useTypedNavigation()
+const LoginOptions = () => {
+  const { navigate } = useTypedNavigation()
 
   return (
     <PageLayout type="white">
@@ -24,17 +24,19 @@ const InitialScreen = () => {
           To access more information and features please Sign In or create account.
         </Text>
         <Spacer size={20} />
-        <Button type="outline" onPress={() => navigation.navigate("Welcome")}>
+        <Button type="outline" onPress={() => navigate("Welcome")}>
           Continue without sign in
         </Button>
         <Spacer size={20} />
-        <Button type="primary" onPress={() => navigation.navigate("SignIn")}>
+        <Button type="primary" onPress={() => navigate("SignIn")}>
           Sign in
         </Button>
         <Spacer size={20} />
         <Divider />
         <Spacer size={20} />
-        <Button type="secondary">Create account</Button>
+        <Button type="secondary" onPress={() => navigate("CreateAccount")}>
+          Create account
+        </Button>
         <Spacer size={20} />
         <Button type="outline" icon="apple">
           Continue with Apple
@@ -55,4 +57,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default InitialScreen
+export default LoginOptions

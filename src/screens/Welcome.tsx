@@ -4,7 +4,7 @@ import { Text } from "../components/CustomText"
 import { textStyles } from "../styles"
 import PageLayout from "../components/PageLayout"
 
-const WelcomeScreen = () => {
+const Welcome = () => {
   return (
     <PageLayout type="blue">
       <View style={styles.container}>
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default WelcomeScreen
+export default Welcome

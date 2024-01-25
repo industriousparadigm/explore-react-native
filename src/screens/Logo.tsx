@@ -3,7 +3,7 @@ import { TouchableOpacity, StyleSheet, Image } from "react-native"
 import PageLayout from "../components/PageLayout"
 import { useTypedNavigation } from "../hooks/useTypedNavigation"
 
-const LogoScreen = () => {
+const Logo = () => {
   const navigation = useTypedNavigation()
 
   return (
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default LogoScreen
+export default Logo
