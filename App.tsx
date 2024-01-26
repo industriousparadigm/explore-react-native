@@ -12,10 +12,10 @@ import ForgotPassword from "./src/screens/ForgotPassword"
 import { StatusBar, StyleSheet, View } from "react-native"
 import Onboarding from "./src/screens/Onboarding"
 import CreateAccount from "./src/screens/CreateAccount"
+import VerifyAccount from "./src/screens/VerifyAccount"
+import { RootStackParamList } from "./src/types"
 
-const Stack = createStackNavigator()
-
-async function loadFonts() {}
+const Stack = createStackNavigator<RootStackParamList>()
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync()
@@ -26,7 +26,7 @@ const App = () => {
   useEffect(() => {
     async function prepare() {
       try {
-        // Pre-load fonts, make any API calls you need to do here
+        // pre app load operations: fonts, api calls
         await Font.loadAsync({
           "Gilroy-Regular": require("./assets/fonts/Gilroy-Regular.ttf"),
           "Gilroy-Bold": require("./assets/fonts/Gilroy-Bold.ttf"),
@@ -67,6 +67,7 @@ const App = () => {
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
           <Stack.Screen name="CreateAccount" component={CreateAccount} />
+          <Stack.Screen name="VerifyAccount" component={VerifyAccount} />
           <Stack.Screen name="Welcome" component={Welcome} />
         </Stack.Navigator>
       </NavigationContainer>

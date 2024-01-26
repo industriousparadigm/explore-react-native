@@ -8,6 +8,7 @@ import { textStyles } from "../styles"
 import UserInput from "../components/UserInput"
 import { Text } from "../components/CustomText"
 import PageLayout from "../components/PageLayout"
+import { isValidEmail } from "../utils"
 
 const SignIn = () => {
   const [email, setEmail] = useState("")
@@ -17,18 +18,13 @@ const SignIn = () => {
 
   const navigation = useTypedNavigation()
 
-  const validateEmail = (email: string) => {
-    const re = /\S+@\S+\.\S+/
-    return re.test(email)
-  }
-
   const handleSignIn = () => {
     // Clear previous errors
     setEmailError("")
     setPasswordError("")
 
     // Validate email
-    if (!validateEmail(email)) {
+    if (!isValidEmail(email)) {
       setEmailError("Please enter a valid email address")
       return
     }

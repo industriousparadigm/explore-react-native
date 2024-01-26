@@ -5,5 +5,6 @@ export type RootStackParamList = {
   Welcome: undefined
   ForgotPassword: undefined
   CreateAccount: undefined
+  VerifyAccount: { email: string; phoneNumber: string }
   Onboarding: undefined
 }

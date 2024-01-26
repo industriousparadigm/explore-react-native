@@ -7,12 +7,15 @@ import { textStyles } from "../styles"
 import UserInput from "../components/UserInput"
 import { Text } from "../components/CustomText"
 import PageLayout from "../components/PageLayout"
+import { CountryPicker } from "react-native-country-codes-picker"
+import { isValidCountryCode, isValidEmail, isValidPassword, isValidPhoneNumber } from "../utils"
 
 const CreateAccount = () => {
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [email, setEmail] = useState("")
   const [countryCode, setCountryCode] = useState("+44")
+  const [showCountryPicker, setShowCountryPicker] = useState(false)
   const [phoneNumber, setPhoneNumber] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -20,6 +23,7 @@ const CreateAccount = () => {
   const [nameError, setNameError] = useState("")
   const [surnameError, setSurnameError] = useState("")
   const [emailError, setEmailError] = useState("")
+  const [countryCodeError, setCountryCodeError] = useState("")
   const [phoneError, setPhoneError] = useState("")
   const [passwordError, setPasswordError] = useState("")
   const [confirmPasswordError, setConfirmPasswordError] = useState("")
@@ -35,11 +39,62 @@ const CreateAccount = () => {
     setPasswordError("")
     setConfirmPasswordError("")
 
-    // Perform your validation checks here
-    // ...
+    const completePhoneNumber = phoneNumber ? countryCode + " " + phoneNumber : ""
 
-    // If everything is valid, navigate to the next screen or perform the account creation logic
-    navigation.navigate("Welcome")
+    // TODO DELETE THIS (or use it for development to bypass checks)
+    // navigation.navigate("VerifyAccount", {
+    //   email: email || "sample@email.com",
+    //   phoneNumber: completePhoneNumber || "+351 214710054",
+    // })
+    // return
+
+    // cover the case of any error while not returning early
+    let error = false
+
+    // validation checks
+    if (!name) {
+      setNameError("Enter your first name")
+      error = true
+    }
+
+    if (!surname) {
+      setSurnameError("Enter your family name")
+      error = true
+    }
+
+    if (!isValidEmail(email)) {
+      setEmailError("Enter a valid email address")
+      error = true
+    }
+
+    if (!isValidCountryCode(countryCode)) {
+      setCountryCodeError("Should be a valid code e.g. '+44'")
+      error = true
+    }
+
+    if (!isValidPhoneNumber(phoneNumber)) {
+      setPhoneError("Enter a valid phone number")
+      error = true
+    }
+
+    if (!isValidPassword(password)) {
+      setPasswordError("At least 8 characters, 1 symbol, 1 number")
+      error = true
+    }
+
+    if (!password || password !== confirmPassword) {
+      setConfirmPasswordError("Passwords do not match")
+      error = true
+    }
+
+    // success case!
+    return (
+      !error &&
+      navigation.navigate("VerifyAccount", {
+        email: email,
+        phoneNumber: completePhoneNumber,
+      })
+    )
   }
 
   return (
@@ -68,11 +123,51 @@ const CreateAccount = () => {
           error={emailError}
         />
         <View style={styles.inlineInputs}>
-          <UserInput
+          {/* TODO: implement country picker */}
+
+          {/* <UserInput
             // style={styles.countryCode}
             value={countryCode}
             onChangeText={setCountryCode}
             // You might want a picker or modal to select country codes
+          /> */}
+          {/* <TouchableOpacity
+            onPress={() => setShowCountryPicker(true)}
+            style={{
+              height: 54,
+              borderWidth: 1,
+              borderColor: "#D8D8D8",
+              padding: 15,
+              backgroundColor: "#FFFFFF",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 17,
+              }}
+            >
+              {countryCode}
+            </Text>
+          </TouchableOpacity> */}
+          {/* <CountryPicker
+            lang="en"
+            show={showCountryPicker}
+            // when picker button press you will get the country object with dial code
+            pickerButtonOnPress={(item) => {
+              setCountryCode(item.dial_code)
+              setShowCountryPicker(false)
+            }}
+          /> */}
+          <UserInput
+            placeholder="+44"
+            value={countryCode}
+            onChangeText={setCountryCode}
+            error={countryCodeError}
+            keyboardType="phone-pad"
+            style={{
+              flex: 5, // 25% of space
+              marginRight: 12,
+            }}
           />
           <UserInput
             // style={styles.phoneNumber}
@@ -81,6 +176,9 @@ const CreateAccount = () => {
             onChangeText={setPhoneNumber}
             error={phoneError}
             keyboardType="phone-pad"
+            style={{
+              flex: 15, // 75% of space
+            }}
           />
         </View>
         <UserInput
@@ -111,6 +209,7 @@ const CreateAccount = () => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    height: "auto",
     padding: 16,
   },
   header: {
@@ -126,13 +225,6 @@ const styles = StyleSheet.create({
   inlineInputs: {
     flexDirection: "row",
     justifyContent: "space-between",
-  },
-  countryCode: {
-    flex: 1,
-    marginRight: 8, // Adjust the spacing based on your design
-  },
-  phoneNumber: {
-    flex: 3,
   },
   // Add other styles for your input fields and error messages
 })

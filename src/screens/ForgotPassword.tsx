@@ -16,7 +16,7 @@ const ForgotPassword = () => {
 
   const navigation = useTypedNavigation()
 
-  const validateEmail = (email: string) => {
+  const isValidEmail = (email: string) => {
     const re = /\S+@\S+\.\S+/
     return re.test(email)
   }
@@ -26,7 +26,7 @@ const ForgotPassword = () => {
     setEmailError("")
 
     // Validate email
-    if (!validateEmail(email)) {
+    if (!isValidEmail(email)) {
       setEmailError("Please enter a valid email address")
       return
     }
@@ -88,7 +88,7 @@ const ForgotPassword = () => {
 
             <UserInput
               label="Email address"
-              type="email"
+              keyboardType="email-address"
               placeholder="E.g. 1234@hometrail.com"
               value={email}
               onChangeText={setEmail}

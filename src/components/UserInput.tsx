@@ -1,8 +1,9 @@
 import React from "react"
-import { View, TextInput, StyleSheet } from "react-native"
+import { View, TextInput, StyleSheet, StyleProp, TextStyle } from "react-native"
 import { Text } from "./CustomText"
 
 type UserInputProps = {
+  style?: StyleProp<TextStyle>
   label?: string
   placeholder?: string
   error?: string
@@ -33,9 +34,10 @@ const UserInput: React.FC<UserInputProps> = ({
   onChangeText,
   secureTextEntry = false,
   keyboardType = "default",
+  style,
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       {label && <Text style={styles.label}>{label}</Text>}
       <TextInput
         style={[styles.input, !!error && styles.inputError]}
