@@ -5,7 +5,7 @@ import { Text } from "./CustomText"
 
 type ButtonProps = {
   type?: "primary" | "secondary" | "outline"
-  icon?: "google" | "apple"
+  icon?: "google" | "apple" | "payment"
   onPress?: (event: GestureResponderEvent) => void
   children: React.ReactNode
 }
@@ -13,6 +13,7 @@ type ButtonProps = {
 const icons = {
   google: require("../../assets/images/google-icon.png"),
   apple: require("../../assets/images/apple-icon.png"),
+  payment: require("../../assets/images/hand-with-coin.png"),
 }
 
 const Button: React.FC<ButtonProps> = ({ type = "primary", icon, children, onPress }) => {

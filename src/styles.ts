@@ -7,8 +7,14 @@ export const textStyles = StyleSheet.create({
     color: "#9C9C9C",
   },
   boldText: {
-    fontSize: 21,
     color: "#3C3C3C",
     fontFamily: "Gilroy-Bold",
+  },
+})
+
+export const viewStyles = StyleSheet.create({
+  flexRow: {
+    flex: 1,
+    flexDirection: "row",
   },
 })

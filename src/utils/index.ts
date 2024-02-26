@@ -1,3 +1,5 @@
+import { Address } from "../types"
+
 export function isValidEmail(email: string) {
   const re = /\S+@\S+\.\S+/
   return re.test(email)
@@ -30,4 +32,39 @@ export function isValidPassword(password: string): boolean {
 
   // Validate the password against all the regular expressions
   return minLengthRegex.test(password) && symbolRegex.test(password) && numberRegex.test(password)
+}
+
+export function formatUKPostcode(postcode: string) {
+  const cleanPostcode = postcode.replace(/\s/g, "").toUpperCase()
+
+  let result = {
+    formattedPostcode: postcode,
+    outwardCode: "",
+    inwardCode: "",
+  }
+
+  // return same input if bad format
+  if (cleanPostcode.length < 5 || cleanPostcode.length > 7) {
+    console.warn("Bad postcode format:", postcode)
+    return result
+  }
+
+  // inward code is always 3 characters from the end
+  const inwardCode = cleanPostcode.slice(-3)
+  const outwardCode = cleanPostcode.slice(0, -3)
+
+  return {
+    formattedPostcode: `${outwardCode} ${inwardCode}`,
+    outwardCode,
+    inwardCode,
+  }
+}
+
+export function formatAddress(address: Address) {
+  const { outwardCode } = formatUKPostcode(address.postcode)
+  return `${address.doorNumber} ${address.street}・${outwardCode}`
+}
+
+export function formatNumberWithCommas(num: number): string {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }

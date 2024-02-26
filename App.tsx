@@ -1,4 +1,3 @@
-// App.tsx
 import React, { useCallback, useEffect, useState } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -14,6 +13,7 @@ import Onboarding from "./src/screens/Onboarding"
 import CreateAccount from "./src/screens/CreateAccount"
 import VerifyAccount from "./src/screens/VerifyAccount"
 import { RootStackParamList } from "./src/types"
+import Discover from "./src/screens/Discover"
 
 const Stack = createStackNavigator<RootStackParamList>()
 
@@ -69,6 +69,7 @@ const App = () => {
           <Stack.Screen name="CreateAccount" component={CreateAccount} />
           <Stack.Screen name="VerifyAccount" component={VerifyAccount} />
           <Stack.Screen name="Welcome" component={Welcome} />
+          <Stack.Screen name="Discover" component={Discover} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
@@ -78,6 +79,5 @@ const App = () => {
 const styles = StyleSheet.create({
   splash: { width: "100%", height: "100%", backgroundColor: "limegreen" },
 })
-
 
 export default App

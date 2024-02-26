@@ -66,12 +66,12 @@ const VerifyAccount = ({ route }: Props) => {
               {verificationMethod === "sms" ? (
                 <Text style={textStyles.regularText}>
                   We will send you a text message to this number{" "}
-                  <Text style={{ fontWeight: "bold", color: "#3c3c3c" }}>{phoneNumber}</Text>.
+                  <Text style={[textStyles.boldText, { color: "#3c3c3c" }]}>{phoneNumber}</Text>.
                 </Text>
               ) : (
                 <Text style={textStyles.regularText}>
                   We will send you an email to this address{" "}
-                  <Text style={{ fontWeight: "bold", color: "#3c3c3c" }}>{email}</Text>.
+                  <Text style={[textStyles.boldText, { color: "#3c3c3c" }]}>{email}</Text>.
                 </Text>
               )}
             </Text>

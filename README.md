@@ -4,6 +4,12 @@ I am experimenting with React Native: getting familiar with development and gett
 
 The project is using Expo Go for development and internal distribution.
 
+## Dependencies
+
+Last updated Feb 3, 2024.
+
+- we use cloudinary for some of our imagery;
+
 ## Run Locally
 
 1. **Clone the Repository**:

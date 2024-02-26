@@ -1,23 +1,27 @@
 import React from "react"
-import { StyleSheet, View, Image } from "react-native"
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native"
 import { Text } from "../components/CustomText"
 import { textStyles } from "../styles"
 import PageLayout from "../components/PageLayout"
+import { useTypedNavigation } from "../hooks/useTypedNavigation"
 
 const Welcome = () => {
+  const { navigate } = useTypedNavigation()
   return (
-    <PageLayout type="blue">
-      <View style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
+    <TouchableOpacity style={{ flex: 1 }} onPress={() => navigate("Discover")}>
+      <PageLayout type="blue">
+        <View style={styles.container}>
+          <View style={styles.logoContainer}>
+            <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
+          </View>
+          <Text>
+            <Text style={[textStyles.boldText, styles.welcomeText]}>Welcome{"\n"}to </Text>
+            <Text style={[textStyles.boldText, styles.welcomeText, styles.greyText]}>Hometrail</Text>
+          </Text>
+          <Text style={styles.footerText}>Everything starts today</Text>
         </View>
-        <Text>
-          <Text style={[textStyles.boldText, styles.welcomeText]}>Welcome{"\n"}to </Text>
-          <Text style={[textStyles.boldText, styles.welcomeText, styles.greyText]}>Hometrail</Text>
-        </Text>
-        <Text style={styles.footerText}>Everything starts today</Text>
-      </View>
-    </PageLayout>
+      </PageLayout>
+    </TouchableOpacity>
   )
 }
 
